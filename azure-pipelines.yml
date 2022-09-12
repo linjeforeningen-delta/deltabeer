@@ -4,42 +4,42 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 trigger:
-- master
-- feature/*
+  - main
+  - feature/*
 
 pool:
   vmImage: ubuntu-latest
 
 steps:
-- task: Gradle@2
-  displayName: 'Build and test'
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'clean build test jacocoTestReport'
+  - task: Gradle@2
+    displayName: 'Build and test'
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: true
+      testResultsFiles: '**/TEST-*.xml'
+      tasks: 'clean build test jacocoTestReport'
 
-- task: PublishCodeCoverageResults@1
-  displayName: 'Publish code coverage'
-  inputs:
-    summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/reports/jacoco/report.xml'
-    pathToSources: '$(System.DefaultWorkingDirectory)/src/main/kotlin'
+  - task: PublishCodeCoverageResults@1
+    displayName: 'Publish code coverage'
+    inputs:
+      summaryFileLocation: '$(System.DefaultWorkingDirectory)/**/reports/jacoco/report.xml'
+      pathToSources: '$(System.DefaultWorkingDirectory)/src/main/kotlin'
 
-- task: Gradle@2
-  displayName: 'Create and publish container image'
-  condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'master'))
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.11'
-    jdkArchitectureOption: 'x64'
-    tasks: 'jib -Djib.to.image=$(EWTestContainerRegistryURL)/kotlin-beer:latest
+  - task: Gradle@2
+    displayName: 'Create and publish container image'
+    condition: and(succeeded(), eq(variables['Build.SourceBranchName'], 'main'))
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.11'
+      jdkArchitectureOption: 'x64'
+      tasks: 'jib -Djib.to.image=$(EWTestContainerRegistryURL)/kotlin-beer:latest
             -Djib.to.auth.username=$(EWTestContainerRegistryUser)
             -Djib.to.auth.password=$(EWTestContainerRegistryPW)'
