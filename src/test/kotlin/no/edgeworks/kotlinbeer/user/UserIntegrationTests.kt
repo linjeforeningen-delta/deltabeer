@@ -270,7 +270,7 @@ internal class UserIntegrationTests {
             val userToDelete =
                 assertDoesNotThrow("User to delete should already exists.") {
                     userController.getUserByCardId(
-                        userRepository.getById(
+                        userRepository.getReferenceById(
                             1
                         ).cardId
                     )

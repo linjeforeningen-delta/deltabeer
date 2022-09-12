@@ -26,13 +26,13 @@ create table users
 
 create table user_properties
 (
-    id           int8 primary key,
-    type         varchar(15) not null,
-    value        varchar(63),
-    created_by   varchar(15) not null,
-    created_date timestamp   not null,
-    changed_by   varchar(15),
-    changed_date timestamp
+    id             int8 primary key,
+    property_type  varchar(15) not null,
+    property_value varchar(63),
+    created_by     varchar(15) not null,
+    created_date   timestamp   not null,
+    changed_by     varchar(15),
+    changed_date   timestamp
 );
 
 create table users_user_properties
@@ -57,7 +57,7 @@ create table transactions
     previous_balance        int4 not null,
     balance_change          int2 not null,
     previous_transaction_id int8,
-    hash                    int8,
+    transaction_hash        int8,
     transaction_date        timestamp
 );
 
@@ -77,7 +77,7 @@ create table borrowed_items
     id             int8 primary key,
     item_id        int8      not null,
     borrower_id    int8      not null,
-    comment        varchar(127),
+    item_comment   varchar(127),
     borrowed_date  timestamp not null,
     return_by_date timestamp not null,
     returned_date  timestamp

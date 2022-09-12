@@ -1,14 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.5.2"
-    id("com.google.cloud.tools.jib") version "3.1.1"
+    id("org.springframework.boot") version "2.7.3"
+    id("com.google.cloud.tools.jib") version "3.2.1"
     id("jacoco")
     id("org.sonarqube") version "3.3"
-    kotlin("jvm") version "1.5.20"
-    kotlin("plugin.spring") version "1.5.20"
-    kotlin("plugin.jpa") version "1.5.20"
-
+    kotlin("jvm") version "1.7.10"
+    kotlin("plugin.spring") version "1.7.10"
+    kotlin("plugin.jpa") version "1.7.10"
 }
 
 apply(plugin = "io.spring.dependency-management")
@@ -26,7 +25,7 @@ tasks.withType(JacocoReport::class.java).all {
 
 group = "no.edgeworks"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 configurations {
     compileOnly {
@@ -39,9 +38,9 @@ repositories {
 }
 
 dependencies {
-    val mockkVersion = "1.11.0"
-    val h2Version = "1.4.200"
-    val flywayVersion = "7.10.0"
+    val mockkVersion = "1.12.7"
+    val h2Version = "2.1.214"
+    val flywayVersion = "9.3.0"
     val azureKeyvaultVersion = "3.6.0"
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")

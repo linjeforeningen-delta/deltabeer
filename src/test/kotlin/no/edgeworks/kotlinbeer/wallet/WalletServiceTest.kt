@@ -126,13 +126,13 @@ internal class WalletServiceTest {
 
             assertTrue { testUserWallet.cashBalance < maxPurchaseValue }
             assertEquals(testUserWallet.cashBalance, 100)
-            assertNull(testUser.userProperties.find { it.type == UserPropertyType.CREDIT })
+            assertNull(testUser.userProperties.find { it.propertyType == UserPropertyType.CREDIT })
 
             assertTrue { testUserWithCreditWallet.cashBalance < maxPurchaseValue }
             assertEquals(testUserWithCreditWallet.cashBalance, 100)
-            assertNotNull(testUserWithCredit.userProperties.find { it.type == UserPropertyType.CREDIT })
+            assertNotNull(testUserWithCredit.userProperties.find { it.propertyType == UserPropertyType.CREDIT })
             assertEquals(
-                testUserWithCredit.userProperties.find { it.type == UserPropertyType.CREDIT }?.value?.toByte(),
+                testUserWithCredit.userProperties.find { it.propertyType == UserPropertyType.CREDIT }?.propertyValue?.toByte(),
                 2
             )
 

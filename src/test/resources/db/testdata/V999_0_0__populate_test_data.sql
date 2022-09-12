@@ -13,13 +13,13 @@ VALUES (3, 10, 'Erich Christian', 'Dahl', 'ecdahls@stud.ntnu.no', '2014-02-12 13
         'Migration', '1970-01-01 01:00:00.000000', null, '2021-07-12 18:39:20.057486');
 
 -- Create test user properties
-INSERT INTO user_properties (id, type, value, created_by, created_date, changed_by, changed_date)
+INSERT INTO user_properties (id, property_type, property_value, created_by, created_date, changed_by, changed_date)
 VALUES (1, 'CREDIT', '1', 'Migration', '2021-07-12 18:39:20.011844', null, '2021-07-12 8:39:20.011778');
-INSERT INTO user_properties (id, type, value, created_by, created_date, changed_by, changed_date)
+INSERT INTO user_properties (id, property_type, property_value, created_by, created_date, changed_by, changed_date)
 VALUES (2, 'COMMENT', 'Fyllesvin', 'Migration', '2021-07-12 18:39:20.020889', null, '201-07-12 18:39:20.020826');
-INSERT INTO user_properties (id, type, value, created_by, created_date, changed_by, changed_date)
+INSERT INTO user_properties (id, property_type, property_value, created_by, created_date, changed_by, changed_date)
 VALUES (3, 'CREDIT', '5', 'Migration', '2021-07-12 18:39:20.024118', null, '2021-07-12 18:39:20.024057');
-INSERT INTO user_properties (id, type, value, created_by, created_date, changed_by, changed_date)
+INSERT INTO user_properties (id, property_type, property_value, created_by, created_date, changed_by, changed_date)
 VALUES (4, 'TITLE', 'Drunkard', 'Migration', '2021-07-12 18:39:20.031276', null, '2021-07-12 18:39:20.031212');
 
 -- Link test user properties
@@ -39,10 +39,10 @@ INSERT INTO wallets (id, user_id, cash_balance, total_spent, latest_transaction_
 VALUES (2, 2, 0, 2825, null);
 
 -- Create transactions
-INSERT INTO transactions (id, wallet_id, previous_balance, balance_change, previous_transaction_id, hash,
+INSERT INTO transactions (id, wallet_id, previous_balance, balance_change, previous_transaction_id, transaction_hash,
                           transaction_date)
 VALUES (1, 1, 0, -100, null, 0, '2021-07-12 18:39:50.525136');
-INSERT INTO transactions (id, wallet_id, previous_balance, balance_change, previous_transaction_id, hash,
+INSERT INTO transactions (id, wallet_id, previous_balance, balance_change, previous_transaction_id, transaction_hash,
                           transaction_date)
 VALUES (2, 2, 0, 0, null, 0, '2021-07-12 18:39:59.148185');
 

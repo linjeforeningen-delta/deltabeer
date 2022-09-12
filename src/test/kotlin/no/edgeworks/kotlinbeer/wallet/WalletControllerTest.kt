@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.context.TestConfiguration
 import org.springframework.context.annotation.Bean
+import org.springframework.security.test.context.support.WithMockUser
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.context.junit.jupiter.SpringExtension
 import org.springframework.test.web.servlet.MockMvc
@@ -18,8 +20,9 @@ import java.util.*
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension::class)
-@WebMvcTest(WalletController::class)
-internal class WalletControllerTest {
+@WebMvcTest(controllers = [WalletController::class])
+@WithMockUser
+internal class WalletControllerTest(@Autowired val mockMvc: MockMvc) {
     private val testUserA = UserDAO(
         id = 1,
         cardId = 10,
@@ -47,15 +50,13 @@ internal class WalletControllerTest {
     }
 
     @Autowired
-    private lateinit var mockMvc: MockMvc
-
-    @Autowired
     private lateinit var mockWalletService: WalletService
 
     @Test
     fun purchase() {
         every { mockWalletService.purchase(any(), any()) } returns UserWallet(testUserA, walletA)
-        mockMvc.post("/users/123/wallet/buy?value=100")
+        mockMvc
+            .post(urlTemplate = "/users/123/wallet/buy?value=100") { with(csrf()) }
             .andExpect {
                 status { isOk() }
             }

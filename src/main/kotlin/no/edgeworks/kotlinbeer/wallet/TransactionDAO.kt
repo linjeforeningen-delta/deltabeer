@@ -15,7 +15,7 @@ data class TransactionDAO(
     val previousBalance: Int,
     val balanceChange: Short,
     val previousTransactionId: Long? = null,
-    val hash: Long?,
+    val transactionHash: Long?,
     @CreationTimestamp
     val transactionDate: ZonedDateTime = ZonedDateTime.now(),
 ) : Serializable {
@@ -25,7 +25,7 @@ data class TransactionDAO(
         previousBalance = wallet.cashBalance,
         balanceChange = change,
         previousTransactionId = wallet.latestTransaction?.id,
-        hash = 977 * (977 * ((wallet.latestTransaction?.hash
+        transactionHash = 977 * (977 * ((wallet.latestTransaction?.transactionHash
             ?: 0) + 977 * wallet.cashBalance) + (wallet.latestTransaction?.transactionDate.hashCode())),
     )
 }

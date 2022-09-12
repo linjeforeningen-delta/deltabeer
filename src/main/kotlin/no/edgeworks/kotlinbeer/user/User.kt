@@ -21,11 +21,12 @@ data class User(
         userDAO.lastName,
         userDAO.birthday,
         userDAO.email,
-        userDAO.userProperties.find { it.type == UserPropertyType.TITLE }?.value,
-        userDAO.userProperties.filter { it.type == UserPropertyType.COMMENT }.mapNotNullTo(HashSet()) { it.value },
+        userDAO.userProperties.find { it.propertyType == UserPropertyType.TITLE }?.propertyValue,
+        userDAO.userProperties.filter { it.propertyType == UserPropertyType.COMMENT }
+            .mapNotNullTo(HashSet()) { it.propertyValue },
         userDAO.userGroup,
         userDAO.isMember,
-        userDAO.userProperties.find { it.type == UserPropertyType.CREDIT }?.value?.toByte(),
+        userDAO.userProperties.find { it.propertyType == UserPropertyType.CREDIT }?.propertyValue?.toByte(),
     ) {
         if (userDAO.deletedDate != null) {
             throw UserIsDeletedException()

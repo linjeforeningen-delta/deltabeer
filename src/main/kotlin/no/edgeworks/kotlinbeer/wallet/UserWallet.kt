@@ -14,7 +14,9 @@ data class UserWallet(
         }
     }
 
-    fun creditRating() = userDAO.userProperties.find { it.type == UserPropertyType.CREDIT }?.value?.toByte() ?: 0
+    fun creditRating() =
+        userDAO.userProperties.find { it.propertyType == UserPropertyType.CREDIT }?.propertyValue?.toByte() ?: 0
+
     fun cashBalance() = walletDAO.cashBalance
     fun latestTransaction() = walletDAO.latestTransaction?.let { Transaction(it) }
     fun totalSpent() = walletDAO.totalSpent

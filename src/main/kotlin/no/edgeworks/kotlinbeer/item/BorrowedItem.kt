@@ -13,7 +13,7 @@ data class BorrowedItem(
     constructor(borrowedItem: BorrowedItemDAO) : this(
         id = borrowedItem.id,
         item = Item(borrowedItem.item),
-        comment = borrowedItem.comment,
+        comment = borrowedItem.itemComment,
         borrowedDate = borrowedItem.borrowedDate,
         returnByDate = borrowedItem.borrowedDate,
         returnedDate = if (borrowedItem.returnedDate == null) borrowedItem.returnedDate else null

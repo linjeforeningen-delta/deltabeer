@@ -47,7 +47,7 @@ class UserService(
 
         // Check for changed user title
         if (oldUser.title != updatedUser.title) {
-            userProperties = userProperties.filterNotTo(mutableSetOf()) { it.type == UserPropertyType.TITLE }
+            userProperties = userProperties.filterNotTo(mutableSetOf()) { it.propertyType == UserPropertyType.TITLE }
             if (updatedUser.title != null) {
                 userProperties.add(UserPropertyDAO(UserPropertyType.TITLE, updatedUser.title, changedBy))
             }
@@ -55,7 +55,7 @@ class UserService(
 
         // Check for changed credit rating
         if (oldUser.creditRating != updatedUser.creditRating) {
-            userProperties = userProperties.filterNotTo(mutableSetOf()) { it.type == UserPropertyType.CREDIT }
+            userProperties = userProperties.filterNotTo(mutableSetOf()) { it.propertyType == UserPropertyType.CREDIT }
             val creditRating = updatedUser.creditRating?.takeIf { it >= 0 } ?: 0
             userProperties.add(UserPropertyDAO(UserPropertyType.CREDIT, creditRating.toString(), changedBy))
         }
@@ -64,7 +64,7 @@ class UserService(
             // Remove comments only in old set
             val commentsToDelete = oldUser.comments.minus(updatedUser.comments)
             userProperties = userProperties.filterNotTo(mutableSetOf()) {
-                it.type == UserPropertyType.COMMENT && commentsToDelete.contains(it.value)
+                it.propertyType == UserPropertyType.COMMENT && commentsToDelete.contains(it.propertyValue)
             }
             // Add comments only in new set
             val commentsToAdd = updatedUser.comments.minus(oldUser.comments)

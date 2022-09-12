@@ -13,7 +13,7 @@ data class BorrowedItemDAO(
     @ManyToOne
     val item: ItemDAO,
     @Column(length = 127, nullable = true)
-    val comment: String?,
+    val itemComment: String?,
     @ManyToOne
     val borrower: UserDAO,
     val borrowedDate: ZonedDateTime = ZonedDateTime.now(),

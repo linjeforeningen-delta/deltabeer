@@ -10,9 +10,9 @@ import javax.persistence.*
 data class UserPropertyDAO(
     @Enumerated(EnumType.STRING)
     @Column(length = 15, nullable = false)
-    val type: UserPropertyType,
+    val propertyType: UserPropertyType,
     @Column(length = 63, nullable = true)
-    val value: String?,
+    val propertyValue: String?,
     @Column(length = 15, nullable = false)
     val createdBy: String,
     @CreationTimestamp

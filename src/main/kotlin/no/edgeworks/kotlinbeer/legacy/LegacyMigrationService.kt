@@ -52,22 +52,22 @@ class LegacyMigrationService(
                 val userProperties = mutableSetOf<UserPropertyDAO>()
                 if (it.comment.isNotBlank()) userProperties.add(
                     UserPropertyDAO(
-                        type = UserPropertyType.TITLE,
-                        value = it.comment,
+                        propertyType = UserPropertyType.TITLE,
+                        propertyValue = it.comment,
                         createdBy = "Migration"
                     )
                 )
                 if (it.misc.isNotBlank()) userProperties.add(
                     UserPropertyDAO(
-                        type = UserPropertyType.COMMENT,
-                        value = it.misc,
+                        propertyType = UserPropertyType.COMMENT,
+                        propertyValue = it.misc,
                         createdBy = "Migration"
                     )
                 )
                 if (it.tab > 0) userProperties.add(
                     UserPropertyDAO(
-                        type = UserPropertyType.CREDIT,
-                        value = it.tab.toString(),
+                        propertyType = UserPropertyType.CREDIT,
+                        propertyValue = it.tab.toString(),
                         createdBy = "Migration"
                     )
                 )
