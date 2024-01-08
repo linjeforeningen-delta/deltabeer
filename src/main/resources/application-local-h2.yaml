@@ -1,0 +1,22 @@
+datasource-url: jdbc:h2:mem:db/beer;DB_CLOSE_ON_EXIT=FALSE
+datasource-username: sa
+datasource-password: sa
+
+spring:
+  flyway:
+    enabled: true
+  devtools:
+    add-properties: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

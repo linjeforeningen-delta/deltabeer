@@ -1,53 +1,47 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "2.7.3"
-    id("com.google.cloud.tools.jib") version "3.2.1"
+    id("org.springframework.boot") version "3.2.1"
+    id("io.spring.dependency-management") version "1.1.4"
+    id("com.google.cloud.tools.jib") version "3.4.0"
     id("jacoco")
-    id("org.sonarqube") version "3.3"
-    kotlin("jvm") version "1.7.10"
-    kotlin("plugin.spring") version "1.7.10"
-    kotlin("plugin.jpa") version "1.7.10"
+    kotlin("jvm") version "1.9.22"
+    kotlin("plugin.spring") version "1.9.22"
+    kotlin("plugin.jpa") version "1.9.22"
 }
 
-apply(plugin = "io.spring.dependency-management")
+group = "dev.stonegarden"
+version = "0.0.2-SNAPSHOT"
 
-jacoco {
-    toolVersion = "0.8.7"
-}
+val javaVersion = JavaVersion.VERSION_21
 
-tasks.withType(JacocoReport::class.java).all {
-    reports {
-        xml.isEnabled = true
-        xml.destination = File("$buildDir/reports/jacoco/report.xml")
-    }
-}
-
-group = "no.edgeworks"
-version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_17
-
-configurations {
-    compileOnly {
-        extendsFrom(configurations.annotationProcessor.get())
-    }
+java {
+    sourceCompatibility = javaVersion
 }
 
 repositories {
     mavenCentral()
 }
 
+jib {
+    from {
+        image = "eclipse-temurin:${javaVersion.majorVersion}-jre"
+    }
+}
+
 dependencies {
-    val mockkVersion = "1.12.7"
-    val h2Version = "2.1.214"
-    val flywayVersion = "9.3.0"
+    val mockkVersion = "1.13.8"
+    val h2Version = "2.2.224"
+    val flywayVersion = "10.4.1"
+    val openapiVersion = "2.3.0"
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
 
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:${openapiVersion}")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     //implementation("org.springframework.boot:spring-boot-starter-hateoas")
@@ -57,6 +51,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
 
     implementation("org.flywaydb:flyway-core:${flywayVersion}")
+    implementation("org.flywaydb:flyway-database-postgresql:${flywayVersion}")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("com.h2database:h2:${h2Version}")
 
@@ -67,26 +62,18 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("io.mockk:mockk:${mockkVersion}")
     testRuntimeOnly("com.h2database:h2:${h2Version}")
+
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 tasks.withType<KotlinCompile> {
     kotlinOptions {
-        freeCompilerArgs = listOf("-Xjsr305=strict")
-        jvmTarget = "11"
+        freeCompilerArgs += "-Xjsr305=strict"
+        jvmTarget = javaVersion.majorVersion
     }
-}
-
-tasks.test {
-    useJUnitPlatform()
 }
 
 tasks.withType<Test> {
     useJUnitPlatform()
-}
-
-jib {
-    to {
-        //image = "ewtestcontainerregistry.azurecr.io/${rootProject.name}:${version}"
-        image = "ewtestcontainerregistry.azurecr.io/${rootProject.name}:latest"
-    }
 }
