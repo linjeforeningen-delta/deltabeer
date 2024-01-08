@@ -41,7 +41,6 @@ dependencies {
     val mockkVersion = "1.12.7"
     val h2Version = "2.1.214"
     val flywayVersion = "9.3.0"
-    val azureKeyvaultVersion = "3.6.0"
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -49,8 +48,6 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
-
-    implementation("com.azure.spring:azure-spring-boot-starter-keyvault-secrets:${azureKeyvaultVersion}")
 
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     //implementation("org.springframework.boot:spring-boot-starter-hateoas")
