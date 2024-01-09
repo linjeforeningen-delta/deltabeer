@@ -25,7 +25,7 @@ repositories {
 
 jib {
     from {
-        image = "eclipse-temurin:${javaVersion.majorVersion}-jre"
+        image = "eclipse-temurin:${javaVersion.majorVersion}-jre-jammy"
     }
 }
 
