@@ -2,6 +2,11 @@ datasource-url: jdbc:h2:mem:db/beer;DB_CLOSE_ON_EXIT=FALSE
 datasource-username: sa
 datasource-password: sa
 
+springdoc:
+  swagger-ui:
+    csrf:
+      enabled: true
+
 spring:
   flyway:
     enabled: true

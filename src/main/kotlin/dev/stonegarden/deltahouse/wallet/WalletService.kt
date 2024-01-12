@@ -1,5 +1,6 @@
 package dev.stonegarden.deltahouse.wallet
 
+import dev.stonegarden.deltahouse.exceptions.InvalidTransactionException
 import dev.stonegarden.deltahouse.user.UserService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -28,13 +29,13 @@ class WalletService(
         val cashBalance = userWallet.cashBalance()
 
         if (price > maxPurchaseValue) {
-            throw dev.stonegarden.deltahouse.exceptions.InvalidTransactionException("Purchase value too high. Max price is ${maxPurchaseValue}.")
+            throw InvalidTransactionException("Purchase value too high. Max price is ${maxPurchaseValue}.")
         }
         if (price <= 0) {
-            throw dev.stonegarden.deltahouse.exceptions.InvalidTransactionException("Purchase price must be positive.")
+            throw InvalidTransactionException("Purchase price must be positive.")
         }
         if (cashBalance + creditRating * creditMultiplier < price) {
-            throw dev.stonegarden.deltahouse.exceptions.InvalidTransactionException(
+            throw InvalidTransactionException(
                 "Not enough funds to complete purchase. Current balance $cashBalance"
                         + if (creditRating > 0) " with a tab of ${creditRating * creditMultiplier}." else "."
             )
@@ -49,14 +50,14 @@ class WalletService(
         val cashBalance = userWallet.cashBalance()
 
         if (amount > maxDepositValue) {
-            throw dev.stonegarden.deltahouse.exceptions.InvalidTransactionException("Deposit value too high. Max deposit is ${maxDepositValue}.")
+            throw InvalidTransactionException("Deposit value too high. Max deposit is ${maxDepositValue}.")
         }
         if (amount <= 0) {
-            throw dev.stonegarden.deltahouse.exceptions.InvalidTransactionException("Deposit must be positive.")
+            throw InvalidTransactionException("Deposit must be positive.")
         }
         // If this is true it is very like we've run into an integer overflow
         if (cashBalance + amount < Int.MIN_VALUE + amount) {
-            throw dev.stonegarden.deltahouse.exceptions.InvalidTransactionException("Depositing more would result in an integer overflow.")
+            throw InvalidTransactionException("Depositing more would result in an integer overflow.")
         }
         return performTransaction(userWallet, amount)
     }

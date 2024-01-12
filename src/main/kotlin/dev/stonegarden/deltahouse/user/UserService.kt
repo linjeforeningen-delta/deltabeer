@@ -1,5 +1,9 @@
 package dev.stonegarden.deltahouse.user
 
+import dev.stonegarden.deltahouse.exceptions.CardIsAlreadyRegisteredException
+import dev.stonegarden.deltahouse.exceptions.EmailIsAlreadyRegisteredException
+import dev.stonegarden.deltahouse.exceptions.UserIsDeletedException
+import dev.stonegarden.deltahouse.exceptions.UserNotFoundException
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.time.ZonedDateTime
@@ -10,9 +14,7 @@ class UserService(
 ) {
 
     fun getAllUsers(): List<User> {
-        return userRepository.findAll()
-            .filter { it.deletedDate == null }
-            .map { User(it) }
+        return userRepository.findAll().filter { it.deletedDate == null }.map { User(it) }
     }
 
     fun getUserByCardId(cardId: Long): User {
@@ -21,10 +23,10 @@ class UserService(
 
     fun createUser(user: User, createdBy: String): User {
         if (userRepository.findByCardId(user.cardId).isPresent) {
-            throw dev.stonegarden.deltahouse.exceptions.CardIsAlreadyRegisteredException()
+            throw CardIsAlreadyRegisteredException()
         }
         if (userRepository.findByEmail(user.email).isPresent) {
-            throw dev.stonegarden.deltahouse.exceptions.EmailIsAlreadyRegisteredException()
+            throw EmailIsAlreadyRegisteredException()
         }
 
         return User(userRepository.save(UserDAO(user, createdBy)))
@@ -86,12 +88,12 @@ class UserService(
 
     fun changeUserCardId(email: String, newCardId: Long, changedBy: String): User {
         if (userRepository.findByCardId(newCardId).isPresent) {
-            throw dev.stonegarden.deltahouse.exceptions.CardIsAlreadyRegisteredException()
+            throw CardIsAlreadyRegisteredException()
         }
 
         val userDAO = userRepository.findByEmail(email)
         if (userDAO.isEmpty) {
-            throw dev.stonegarden.deltahouse.exceptions.UserNotFoundException()
+            throw UserNotFoundException()
         }
         return User(userRepository.save(userDAO.get().copy(cardId = newCardId, changedBy = changedBy)))
     }
@@ -105,10 +107,10 @@ class UserService(
     fun getUserDAOByCardId(cardId: Long): UserDAO {
         val userDAO = userRepository.findByCardId(cardId)
         if (userDAO.isEmpty) {
-            throw dev.stonegarden.deltahouse.exceptions.UserNotFoundException()
+            throw UserNotFoundException()
         }
         if (userDAO.get().deletedDate != null) {
-            throw dev.stonegarden.deltahouse.exceptions.UserIsDeletedException()
+            throw UserIsDeletedException()
         }
         return userDAO.get()
     }
