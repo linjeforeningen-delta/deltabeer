@@ -56,7 +56,7 @@ internal class WalletControllerTest(@Autowired val mockMvc: MockMvc) {
     fun purchase() {
         every { mockWalletService.purchase(any(), any()) } returns UserWallet(testUserA, walletA)
         mockMvc
-            .post(urlTemplate = "/api/v1/users/123/wallet/buy?value=100") { with(csrf()) }
+            .post(urlTemplate = "/api/v1/users/123/wallet/spend?value=100") { with(csrf()) }
             .andExpect {
                 status { isOk() }
             }

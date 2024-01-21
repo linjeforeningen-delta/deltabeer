@@ -1,3 +1,7 @@
+datasource-url: jdbc:postgresql://192.168.1.140:5432/bar
+datasource-username: veh
+datasource-password: 1QtlsofDJ1zLL40cRWo690UuAo0Ogf4lCpwyzklng1WTnNebxWbPx3ytrNCTSJbD
+
 springdoc:
   swagger-ui:
     csrf:

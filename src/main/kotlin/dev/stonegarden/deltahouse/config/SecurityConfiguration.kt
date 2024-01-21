@@ -19,10 +19,25 @@ class SecurityConfiguration {
         httpSecurity.csrf { request ->
             request.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .csrfTokenRequestHandler(CsrfTokenRequestAttributeHandler())
+                //TODO: DON'T DISABLE CSRF!!!
+                .disable()
         }.authorizeHttpRequests { request ->
             request.anyRequest().permitAll()
         }
         return httpSecurity.build()
     }
+
+//    @Bean
+//    fun corsConfigurationSource(): CorsConfigurationSource {
+//        val configuration = CorsConfiguration()
+//        configuration.allowedOrigins = listOf("*")
+//        configuration.allowedMethods = listOf("GET", "POST", "PUT", "DELETE", "OPTIONS")
+//        configuration.allowedHeaders = listOf("*")
+//        configuration.allowCredentials = true
+//        configuration.maxAge = 3600
+//        val source = UrlBasedCorsConfigurationSource()
+//        source.registerCorsConfiguration("/**", configuration)
+//        return source
+//    }
 
 }

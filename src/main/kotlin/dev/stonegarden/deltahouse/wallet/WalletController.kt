@@ -9,7 +9,13 @@ import org.springframework.web.bind.annotation.*
 class WalletController(
     @Autowired val walletService: WalletService,
 ) {
-    @PostMapping("/users/{id}/wallet/buy")
+
+    @GetMapping("/users/{id}/wallet", produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun getWallet(@PathVariable id: Long): UserWalletDTO {
+        return UserWalletDTO(walletService.getWallet(id))
+    }
+
+    @PostMapping("/users/{id}/wallet/spend")
     fun purchase(@PathVariable id: Long, @RequestParam value: Short) {
         walletService.purchase(id, value)
     }
