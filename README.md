@@ -17,9 +17,4 @@ To start the application using an in-memory H2 database run
 The application will be available at [localhost:8080](http://localhost:8080).
 
 Open API (swagger) documentation is available
-at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html),
-and the H2 console is available at [http://localhost:8080/h2-console](http://localhost:8080/h2-console).
-
-## TODO
-
-* Automatically add test data to the database when running locally.
+at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
