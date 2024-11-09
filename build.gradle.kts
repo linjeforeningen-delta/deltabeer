@@ -32,7 +32,7 @@ jib {
 dependencies {
     val mockkVersion = "1.13.8"
     val h2Version = "2.2.224"
-    val flywayVersion = "10.4.1"
+    val flywayVersion = "10.21.0"
     val openapiVersion = "2.3.0"
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
