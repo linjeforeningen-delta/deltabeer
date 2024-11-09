@@ -1,13 +1,13 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.2.1"
-    id("io.spring.dependency-management") version "1.1.4"
-    id("com.google.cloud.tools.jib") version "3.4.0"
+    id("org.springframework.boot") version "3.3.5"
+    id("io.spring.dependency-management") version "1.1.6"
+    id("com.google.cloud.tools.jib") version "3.4.4"
     id("jacoco")
-    kotlin("jvm") version "1.9.22"
-    kotlin("plugin.spring") version "1.9.22"
-    kotlin("plugin.jpa") version "1.9.22"
+    kotlin("jvm") version "2.0.21"
+    kotlin("plugin.spring") version "2.0.21"
+    kotlin("plugin.jpa") version "2.0.21"
 }
 
 group = "dev.stonegarden"
@@ -30,10 +30,10 @@ jib {
 }
 
 dependencies {
-    val mockkVersion = "1.13.8"
-    val h2Version = "2.2.224"
-    val flywayVersion = "10.4.1"
-    val openapiVersion = "2.3.0"
+    val mockkVersion = "1.13.13"
+    val h2Version = "2.3.232"
+    val flywayVersion = "10.21.0"
+    val openapiVersion = "2.6.0"
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
@@ -68,9 +68,9 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = javaVersion.majorVersion
+    compilerOptions {
+        freeCompilerArgs.add("-Xjsr305=strict")
+
     }
 }
 
