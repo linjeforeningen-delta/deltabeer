@@ -68,9 +68,9 @@ dependencies {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = javaVersion.majorVersion
+    compilerOptions {
+        freeCompilerArgs.add("-Xjsr305=strict")
+
     }
 }
 
