@@ -7,7 +7,7 @@ plugins {
     id("jacoco")
     kotlin("jvm") version "1.9.25"
     kotlin("plugin.spring") version "2.0.21"
-    kotlin("plugin.jpa") version "1.9.22"
+    kotlin("plugin.jpa") version "2.0.21"
 }
 
 group = "dev.stonegarden"
