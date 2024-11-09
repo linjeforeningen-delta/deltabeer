@@ -6,7 +6,7 @@ plugins {
     id("com.google.cloud.tools.jib") version "3.4.4"
     id("jacoco")
     kotlin("jvm") version "1.9.25"
-    kotlin("plugin.spring") version "1.9.22"
+    kotlin("plugin.spring") version "1.9.25"
     kotlin("plugin.jpa") version "1.9.22"
 }
 
