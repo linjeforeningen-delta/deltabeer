@@ -1,0 +1,62 @@
+classDiagram
+    direction BT
+    class BorrowedItems {
+        long id
+        ZonedDateTime borrowedDate
+        String itemComment
+        ZonedDateTime returnByDate
+        ZonedDateTime returnedDate
+    }
+    class Items {
+        long id
+        String changedBy
+        ZonedDateTime changedDate
+        String createdBy
+        ZonedDateTime createdDate
+        String description
+        String name
+    }
+    class Transactions {
+        long id
+        short balanceChange
+        int previousBalance
+        Long previousTransactionId
+        ZonedDateTime transactionDate
+        Long transactionHash
+    }
+    class UserProperties {
+        long id
+        String changedBy
+        ZonedDateTime changedDate
+        String createdBy
+        ZonedDateTime createdDate
+        UserPropertyType propertyType
+        String propertyValue
+    }
+    class Users {
+        long id
+        ZonedDateTime birthday
+        long cardId
+        String changedBy
+        ZonedDateTime changedDate
+        String createdBy
+        ZonedDateTime createdDate
+        ZonedDateTime deletedDate
+        String email
+        String firstName
+        boolean isMember
+        String lastName
+        String userGroup
+    }
+    class Wallets {
+        long id
+        int cashBalance
+        int totalSpent
+    }
+
+    BorrowedItems "0..*" --> "0..1" Items
+    BorrowedItems "0..*" --> "0..1" Users
+    Transactions "0..*" --> "0..1" Wallets
+    Users "0..1" --> "0..*" UserProperties
+    Wallets "0..1" --> "0..1" Transactions
+    Wallets "0..1" --> "0..1" Users

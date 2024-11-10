@@ -5,7 +5,7 @@ import jakarta.persistence.*
 import java.io.Serializable
 import java.time.ZonedDateTime
 
-@Entity(name = "BORROWED_ITEMS")
+@Entity(name = "BorrowedItems")
 data class BorrowedItemDAO(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "borrowed_item_id_generator")

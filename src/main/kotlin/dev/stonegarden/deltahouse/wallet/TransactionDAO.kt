@@ -5,7 +5,7 @@ import org.hibernate.annotations.CreationTimestamp
 import java.io.Serializable
 import java.time.ZonedDateTime
 
-@Entity(name = "TRANSACTIONS")
+@Entity(name = "Transactions")
 data class TransactionDAO(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transaction_id_generator")

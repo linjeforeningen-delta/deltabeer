@@ -6,7 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.io.Serializable
 import java.time.ZonedDateTime
 
-@Entity(name = "ITEMS")
+@Entity(name = "Items")
 data class ItemDAO(
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "item_id_generator")

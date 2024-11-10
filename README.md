@@ -1,7 +1,7 @@
-# Deltahouse
+# Deltabeer
 
-A rewrite of an old project called [DeltaPi](https://github.com/vehagn/DeltaPi) for trading tokens for refreshments at
-the student office.
+Deltabeer is the backend of _Ølsystemet_,
+a program for trading tokens for refreshments at the student office.
 
 ## Getting started
 
@@ -18,3 +18,5 @@ The application will be available at [localhost:8080](http://localhost:8080).
 
 Open API (swagger) documentation is available
 at [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html).
+
+For contributing read the [DEVELOPERS.md](./docs/DEVELOPERS.md) documentation.

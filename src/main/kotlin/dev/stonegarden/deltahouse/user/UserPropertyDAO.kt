@@ -6,7 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp
 import java.io.Serializable
 import java.time.ZonedDateTime
 
-@Entity(name = "USER_PROPERTIES")
+@Entity(name = "UserProperties")
 data class UserPropertyDAO(
     @Enumerated(EnumType.STRING)
     @Column(length = 15, nullable = false)
