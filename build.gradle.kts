@@ -15,6 +15,12 @@ version = "0.0.2-SNAPSHOT"
 
 val javaVersion = JavaVersion.VERSION_21
 
+tasks.register("printVersion") {
+    doLast {
+        println(project.version)
+    }
+}
+
 java {
     sourceCompatibility = javaVersion
 }
@@ -25,7 +31,17 @@ repositories {
 
 jib {
     from {
-        image = "eclipse-temurin:${javaVersion.majorVersion}-jre-jammy"
+        image = "gcr.io/distroless/java${javaVersion.majorVersion}-debian12:nonroot"
+        platforms {
+            platform {
+                architecture = "amd64"
+                os = "linux"
+            }
+            platform {
+                architecture = "arm64"
+                os = "linux"
+            }
+        }
     }
 }
 

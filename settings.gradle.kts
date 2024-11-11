@@ -1,1 +1,1 @@
-rootProject.name = "deltahouse"
+rootProject.name = "deltabeer"
