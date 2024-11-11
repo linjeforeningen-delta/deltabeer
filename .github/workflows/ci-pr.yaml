@@ -1,15 +1,14 @@
+name: Run Tests on Pull Request
+
 on:
-  push:
-    branches: [ "main" ]
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
 
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout repository
@@ -37,12 +36,5 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew compileKotlin
 
-      - name: Run test
+      - name: Run tests
         run: ./gradlew test
-
-      - name: Build docker image
-        run: |
-          ./gradlew jib \
-              -Djib.to.image=ghcr.io/${{ github.repository }}:latest \
-              -Djib.to.auth.username=${{ github.actor }} \
-              -Djib.to.auth.password=${{ secrets.GITHUB_TOKEN }}

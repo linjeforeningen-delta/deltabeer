@@ -86,6 +86,22 @@ Developers should aim to write simple [unit tests](https://en.wikipedia.org/wiki
 fix they create.
 This is to avoid regressions and maintain a stable codebase.
 
+## Container
+
+To package this application into a container image we're using
+the [Google Jib Gradle Plugin](https://github.com/GoogleContainerTools/jib/blob/master/jib-gradle-plugin/README.md).
+To build the project to your local docker instance navigate to the root of this project and run
+
+```shell
+./gradlew jibDockerBuild
+```
+
+You should then be able to run a containerised instance of this project using the in-memory H2-database by executing
+
+```shell
+docker run -it --rm -p 8080:8080 deltabeer:$(./gradlew -q printVersion) --spring.profiles.active=local-h2
+```
+
 ## Development
 
 Developers should aim to use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for concise commit
