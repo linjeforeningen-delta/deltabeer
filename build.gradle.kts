@@ -47,7 +47,7 @@ jib {
 
 dependencies {
     val mockkVersion = "1.13.13"
-    val h2Version = "2.3.232"
+    val h2Version = "2.5.250"
     val flywayVersion = "10.21.0"
     val openapiVersion = "2.6.0"
 
